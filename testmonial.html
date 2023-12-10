@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonial Slider</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #testimonial-container {
+      max-width: 600px;
+      width: 100%;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .testimonial {
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .active {
+      display: block;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="testimonial-container">
+    <div class="testimonial active">
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+      <p><strong>John Doe</strong></p>
+    </div>
+
+    <div class="testimonial">
+      <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+      <p><strong>Jane Smith</strong></p>
+    </div>
+
+    <!-- Add more testimonials as needed -->
+
+    <div>
+      <button onclick="changeTestimonial(-1)">Previous</button>
+      <button onclick="changeTestimonial(1)">Next</button>
+    </div>
+  </div>
+
+  <script>
+    let currentTestimonialIndex = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+
+    function showTestimonial(index) {
+      testimonials.forEach((testimonial, i) => {
+        if (i === index) {
+          testimonial.classList.add('active');
+        } else {
+          testimonial.classList.remove('active');
+        }
+      });
+    }
+
+    function changeTestimonial(direction) {
+      currentTestimonialIndex += direction;
+
+      if (currentTestimonialIndex < 0) {
+        currentTestimonialIndex = testimonials.length - 1;
+      }
+
+      if (currentTestimonialIndex >= testimonials.length) {
+        currentTestimonialIndex = 0;
+      }
+
+      showTestimonial(currentTestimonialIndex);
+    }
+
+    showTestimonial(currentTestimonialIndex);
+  </script>
+
+</body>
+</html>
